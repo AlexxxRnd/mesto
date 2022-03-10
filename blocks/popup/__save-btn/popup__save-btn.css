@@ -4,4 +4,17 @@
     background-color: black;
     color: #fff;
     margin: 48px 36px 37px;
+    padding: 0;
+    border: none;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    border-radius: 2px;
+}
+
+.popup__save-btn:hover {
+    opacity: 0.6;
+    cursor: pointer;
 }
