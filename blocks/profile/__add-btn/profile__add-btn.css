@@ -6,7 +6,7 @@
     box-sizing: border-box;
     border-radius: 2px;
     margin-left: auto;
-    background-image: url("/images/btn-add.svg");
+    background-image: url("../../images/btn-add.svg");
     background-repeat: no-repeat;
     background-position: center;
     padding: 0;
