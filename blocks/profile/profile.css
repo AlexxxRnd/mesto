@@ -7,3 +7,12 @@
     justify-content: start;
     align-items: center;
 }
+
+@media screen and (max-width: 767px) {
+    .profile {
+        max-width: 282px;
+        min-height: 286px;
+        margin: 42px auto 0;
+        flex-direction: column;
+    }
+}
