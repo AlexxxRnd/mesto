@@ -15,3 +15,9 @@
     opacity: 0.6;
     cursor: pointer;
 }
+
+@media screen and (max-width: 767px) {
+    .element__like-btn {
+        width: 22px;
+    }
+}
