@@ -19,52 +19,52 @@
                 <img class="profile__avatar" src="images/avatar.svg" alt="аватар">
                 <div class="profile__info">
                     <h1 class="profile__name">Жак-Ив Кусто</h1>
-                    <button class="profile__edit-btn" type="button"></button>
+                    <button aria-label="Редактировать информацию" class="profile__edit-btn" type="button"></button>
                     <h2 class="profile__subname">Исследователь океана</h2>
                 </div>
-                <button class="profile__add-btn" type="button"></button>
+                <button aria-label="Добавить место" class="profile__add-btn" type="button"></button>
             </section>
             <section class="elements">
                 <article class="element">
                     <img class="element__photo" src="images/kirill-pershin-1088404-unsplash.jpg" alt="Карачаевск">
                     <div class="element__info">
                         <h2 class="element__title">Карачаевск</h2>
-                        <button class="element__like-btn" type="button"></button>
+                        <button aria-label="Оценить" class="element__like-btn" type="button"></button>
                     </div>
                 </article>
                 <article class="element">
                     <img class="element__photo" src="images/kirill-pershin-1404681-unsplash.jpg" alt="Гора Эльбрус">
                     <div class="element__info">
                         <h2 class="element__title">Гора Эльбрус</h2>
-                        <button class="element__like-btn" type="button"></button>
+                        <button aria-label="Оценить" class="element__like-btn" type="button"></button>
                     </div>
                 </article>
                 <article class="element">
                     <img class="element__photo" src="images/kirill-pershin-1556355-unsplash.jpg" alt="Домбай">
                     <div class="element__info">
                         <h2 class="element__title">Домбай</h2>
-                        <button class="element__like-btn" type="button"></button>
+                        <button aria-label="Оценить" class="element__like-btn" type="button"></button>
                     </div>
                 </article>
                 <article class="element">
                     <img class="element__photo" src="images/kirill-pershin-1088404-unsplash.jpg" alt="Карачаевск">
                     <div class="element__info">
                         <h2 class="element__title">Карачаевск</h2>
-                        <button class="element__like-btn" type="button"></button>
+                        <button aria-label="Оценить" class="element__like-btn" type="button"></button>
                     </div>
                 </article>
                 <article class="element">
                     <img class="element__photo" src="images/kirill-pershin-1404681-unsplash.jpg" alt="Гора Эльбрус">
                     <div class="element__info">
                         <h2 class="element__title">Гора Эльбрус</h2>
-                        <button class="element__like-btn" type="button"></button>
+                        <button aria-label="Оценить" class="element__like-btn" type="button"></button>
                     </div>
                 </article>
                 <article class="element">
                     <img class="element__photo" src="images/kirill-pershin-1556355-unsplash.jpg" alt="Домбай">
                     <div class="element__info">
                         <h2 class="element__title">Домбай</h2>
-                        <button class="element__like-btn" type="button"></button>
+                        <button aria-label="Оценить" class="element__like-btn" type="button"></button>
                     </div>
                 </article>
             </section>
@@ -76,11 +76,11 @@
 
     <div class="popup">
         <div class="popup__container">
-            <button class="popup__close-btn" type="button"></button>
-            <form class="popup__form">
+            <button aria-label="Закрыть окно" class="popup__close-btn" type="button"></button>
+            <form class="popup__form" name="editForm">
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <input class="popup__input popup__input-name" type='text'>
-                <input class="popup__input popup__input-job" type='text'>
+                <input class="popup__input popup__input_type_name" name="nameInput" type="text">
+                <input class="popup__input popup__input_type_job" name="jobInput" type="text">
                 <button class="popup__save-btn" type="submit">Сохранить</button>
             </form>
         </div>

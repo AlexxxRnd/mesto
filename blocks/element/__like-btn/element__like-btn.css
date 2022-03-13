@@ -1,12 +1,12 @@
 .element__like-btn {
-    width: 25px;
+    width: 26px;
     height: 19px;
     border: none;
     background-color: #fff;
     background-image: url(../../../images/btn-like.svg);
     background-repeat: no-repeat;
-    background-size: cover;
     background-position: center;
+    background-size: contain;
     margin: 5px 5px 1px auto;
     padding: 0;
 }
@@ -16,8 +16,8 @@
     cursor: pointer;
 }
 
-@media screen and (max-width: 767px) {
+/*@media screen and (max-width: 767px) {
     .element__like-btn {
         width: 22px;
     }
-}
+}*/
