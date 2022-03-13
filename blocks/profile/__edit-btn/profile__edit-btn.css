@@ -23,5 +23,6 @@
         height: 18px;
         margin-left: 10px;
         align-self: center;
+        background-size: contain;
     }
 }

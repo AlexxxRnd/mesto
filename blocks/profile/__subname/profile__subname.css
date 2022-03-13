@@ -1,5 +1,6 @@
 .profile__subname {
-    width: 203px;
+    max-width: 203px;
+    width: 100%;
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
