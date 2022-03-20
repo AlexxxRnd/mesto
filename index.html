@@ -53,24 +53,24 @@
 
     <div class="popup" id="popup_editProfile">
         <div class="popup__container">
-            <button aria-label="Закрыть окно" class="popup__close-btn-edit" type="button"></button>
+            <button aria-label="Закрыть окно" class="popup__close-btn popup__close-btn-edit" type="button"></button>
             <form class="popup__form" name="ProfileEditForm">
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <input class="popup__input popup__input_type_name" name="nameInput" type="text">
-                <input class="popup__input popup__input_type_job" name="jobInput" type="text">
+                <input class="popup__input popup__input_type_name" name="nameInput" type="text" placeholder="Имя">
+                <input class="popup__input popup__input_type_job" name="jobInput" type="text" placeholder="Профессия">
                 <button class="popup__save-btn" type="submit">Сохранить</button>
             </form>
         </div>
     </div>
-    
+
     <div class="popup" id="popup_addCard">
         <div class="popup__container">
             <button aria-label="Закрыть окно" class="popup__close-btn popup__close-btn-add" type="button"></button>
             <form class="popup__form popup__form_add" name="CardAddForm">
                 <h2 class="popup__title">Новое место</h2>
-                <input class="popup__input popup__input_type_mesto-name" name="" type="text"
+                <input class="popup__input popup__input_type_mesto-name" name="mestoInput" type="text"
                     placeholder="Название">
-                <input class="popup__input popup__input_type_url" name="" type="text"
+                <input class="popup__input popup__input_type_url" name="urlInput" type="text"
                     placeholder="Ссылка на картинку">
                 <button class="popup__save-btn" type="submit">Создать</button>
             </form>
@@ -78,9 +78,10 @@
     </div>
 
     <div class="popup" id="popup_img">
-        <div class="popup__container popup__image ">
-            <button aria-label="Закрыть окно" class="popup__close-btn" type="button"></button>
-            <img class = "popup__image" src="" alt="">
+        <div class="popup__container-img">
+            <button aria-label="Закрыть окно" class="popup__close-btn popup__close-btn-img" type="button"></button>
+            <img class="popup__image" src="" alt="">
+            <h2 class="popup__title-img"></h2>
         </div>
     </div>
 

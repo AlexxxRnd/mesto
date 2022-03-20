@@ -2,8 +2,10 @@ const editButton = document.querySelector('.profile__edit-btn');
 const addButton = document.querySelector('.profile__add-btn');
 const closeButtonEdit = document.querySelector('.popup__close-btn-edit');
 const closeButtonAdd = document.querySelector('.popup__close-btn-add');
-const imgButton = document.querySelector('.element__photo');
+const closeButtonImg = document.querySelector('.popup__close-btn-img');
 const popupForm = document.querySelector('.popup');
+const imgSrc = document.querySelector('.popup__image');
+const titleImgPopup = document.querySelector('.popup__title-img');
 
 const popupEditForm = document.getElementById('popup_editProfile');
 const popupAddForm = document.getElementById('popup_addCard');
@@ -19,7 +21,6 @@ let nameInput = document.querySelector('.popup__input_type_name');
 let jobInput = document.querySelector('.popup__input_type_job');
 let mestoInput = document.querySelector('.popup__input_type_mesto-name');
 let linkInput = document.querySelector('.popup__input_type_url');
-
 
 const initialCards = [
     {
@@ -80,7 +81,10 @@ function addCard(nameValue, linkValue) {
     });
 
     cardElement.querySelector('.element__photo').addEventListener('click', function (evt) {
-        //evt.target.classList.toggle('element__like-btn_active');
+        imgSrc.src = linkValue;
+        imgSrc.alt = nameValue;
+        titleImgPopup.textContent = nameValue;
+        showPopup(popupImg);
     });
 
     cardsContainer.prepend(cardElement);
@@ -106,12 +110,16 @@ editButton.addEventListener('click', () => {
     showPopup(popupEditForm);
 });
 
-closeButtonAdd.addEventListener('click', (e) => {
+closeButtonAdd.addEventListener('click', () => {
     closePopup(popupAddForm)
 });
 
-closeButtonEdit.addEventListener('click', (e) => {
-    closePopup(popupAddForm)
+closeButtonEdit.addEventListener('click', () => {
+    closePopup(popupEditForm)
+});
+
+closeButtonImg.addEventListener('click', () => {
+    closePopup(popupImg)
 });
 
 formElement.addEventListener('submit', editFormSubmit);
