@@ -48,10 +48,12 @@ const initialCards = [
 
 function showPopup(popup) {
     popup.classList.add('popup_opened');
+    document.addEventListener('keydown', keyHandler);
 }
 
 function closePopup(popup) {
     popup.classList.remove('popup_opened');
+    document.removeEventListener('keydown', keyHandler);
 }
 
 function handleProfileFormSubmit(evt) {
@@ -70,18 +72,18 @@ function createCard(nameValue, linkValue) {
     cardElement.querySelector('.element__title').textContent = nameValue;
     elPhoto.alt = nameValue;
 
-    cardElement.querySelector('.element__delete-btn').addEventListener('click', () => {
-        cardElement.remove();
-    });
+    //cardElement.querySelector('.element__delete-btn').addEventListener('click', () => {
+    //    cardElement.remove();
+    //});
 
-    elPhoto.addEventListener('click', () => {
-        imgSrc.src = linkValue;
-        imgSrc.alt = nameValue;
-        titleImgPopup.textContent = nameValue;
-        showPopup(popupImg);
-    });
+    //elPhoto.addEventListener('click', () => {
+    //    imgSrc.src = linkValue;
+    //    imgSrc.alt = nameValue;
+    //    titleImgPopup.textContent = nameValue;
+    //    showPopup(popupImg);
+    //});
 
-    return cardElement
+    return cardElement;
 }
 
 function addCard(nameValue, linkValue) {
@@ -117,12 +119,15 @@ editButton.addEventListener('click', () => {
     showPopup(popupEditForm);
 });
 
+//подумать и переделать
 closeButton.forEach(el => el.addEventListener('click', function (evt) {
     closePopup(evt.currentTarget);
 }));
-
+//подумать и переделать
 currentPopup.forEach(el => el.addEventListener('click', function (evt) {
-    closePopup(evt.currentTarget);
+    if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-btn')) {
+        closePopup(evt.currentTarget);
+    }
 }));
 
 profileForm.addEventListener('submit', handleProfileFormSubmit);
@@ -132,6 +137,15 @@ cardsContainer.addEventListener('click', function (evt) {
     if (evt.target.classList.contains('element__like-btn')) {
         evt.target.classList.toggle('element__like-btn_active');
     };
+    if (evt.target.classList.contains('element__delete-btn')) {
+        evt.target.closest('.element').remove();
+    }
+    if (evt.target.classList.contains('element__photo')) {
+        const thisEl = evt.target.closest('.element')
+        const thisElTitle = thisEl.querySelector('.element__title');
+        imgSrc.src = thisEl.querySelector('.element__photo').src;
+        imgSrc.alt = thisElTitle.textContent;
+        titleImgPopup.textContent = thisElTitle.textContent;
+        showPopup(popupImg);
+    }
 });
-
-document.addEventListener('keydown', keyHandler);
