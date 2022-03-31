@@ -1,6 +1,6 @@
 const editButton = document.querySelector('.profile__edit-btn');
 const addButton = document.querySelector('.profile__add-btn');
-const closeButton = document.querySelectorAll('.popup__close-btn');
+const closeButton = document.querySelector('.popup__close-btn');
 const currentPopup = document.querySelectorAll('.popup');
 const imgSrc = document.querySelector('.popup__image');
 const titleImgPopup = document.querySelector('.popup__title-img');
@@ -119,10 +119,9 @@ editButton.addEventListener('click', () => {
     showPopup(popupEditForm);
 });
 
-//подумать и переделать
-closeButton.forEach(el => el.addEventListener('click', function (evt) {
-    closePopup(evt.currentTarget);
-}));
+closeButton.addEventListener('click', function (evt) {
+    closePopup(evt.target.closest('.popup'));
+});
 //подумать и переделать
 currentPopup.forEach(el => el.addEventListener('click', function (evt) {
     if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-btn')) {
@@ -141,7 +140,7 @@ cardsContainer.addEventListener('click', function (evt) {
         evt.target.closest('.element').remove();
     }
     if (evt.target.classList.contains('element__photo')) {
-        const thisEl = evt.target.closest('.element')
+        const thisEl = evt.target.closest('.element');
         const thisElTitle = thisEl.querySelector('.element__title');
         imgSrc.src = thisEl.querySelector('.element__photo').src;
         imgSrc.alt = thisElTitle.textContent;
