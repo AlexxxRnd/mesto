@@ -48,10 +48,10 @@
             <button aria-label="Закрыть окно" class="popup__close-btn" type="button"></button>
             <form class="popup__form" name="ProfileEditForm" novalidate>
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <input class="popup__input popup__input_type_name" name="nameInput" type="text" placeholder="Имя"
+                <input class="popup__input popup__input_type_name" id="name-input" name="nameInput" type="text" placeholder="Имя"
                     minlength="2" maxlength="40" required>
                 <span class="popup__input-error name-input-error"></span>
-                <input class="popup__input popup__input_type_job" name="jobInput" type="text" placeholder="О себе"
+                <input class="popup__input popup__input_type_job" id="job-input" name="jobInput" type="text" placeholder="О себе"
                     minlength="2" maxlength="200" required>
                 <span class="form__input-error job-input-error"></span>
                 <button class="popup__save-btn" type="submit">Сохранить</button>
@@ -64,10 +64,10 @@
             <button aria-label="Закрыть окно" class="popup__close-btn" type="button"></button>
             <form class="popup__form popup__form_add" name="CardAddForm" novalidate>
                 <h2 class="popup__title">Новое место</h2>
-                <input class="popup__input popup__input_type_mesto-name" name="mestoInput" type="text"
+                <input class="popup__input popup__input_type_mesto-name" id="mesto-input" name="mestoInput" type="text"
                     placeholder="Название" minlength="2" maxlength="30" required>
-                <span class="popup__input-error mesto-name-input-error"></span>
-                <input class="popup__input popup__input_type_url" name="urlInput" type="text"
+                <span class="popup__input-error mesto-input-error"></span>
+                <input class="popup__input popup__input_type_url" id="url-input" name="urlInput" type="text"
                     placeholder="Ссылка на картинку" type="url" required>
                 <span class="popup__input-error url-input-error"></span>
                 <button class="popup__save-btn" type="submit">Создать</button>

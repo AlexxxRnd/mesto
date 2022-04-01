@@ -1,15 +1,23 @@
+const enableValidation = {
+  formElement: '.popup__form',
+  inputElement: '.popup__input',
+  submitButtonSelector: '.popup__save-btn',
+  inactiveButtonClass: 'popup__save-btn_disabled',
+  inputErrorClass: 'popup__input-error',
+  errorClass: 'popup__error_visible'
+};
 
 const showInputError = (formElement, inputElement, errorMessage) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-    inputElement.classList.add('form__input_type_error');
+    inputElement.classList.add('popup__input-error');
     errorElement.textContent = errorMessage;
-    errorElement.classList.add('form__input-error_active');
+    errorElement.classList.add('popup__input-error_active');
 };
 
 const hideInputError = (formElement, inputElement) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-    inputElement.classList.remove('form__input_type_error');
-    errorElement.classList.remove('form__input-error_active');
+    inputElement.classList.remove('popup__input-error');
+    errorElement.classList.remove('popup__input-error_active');
     errorElement.textContent = '';
 };
 
@@ -30,7 +38,7 @@ const setEventListeners = (formElement) => {
     });
 };
 
-const enableValidation = () => {
+const enableValidation1 = () => {
     const formList = Array.from(document.querySelectorAll('.popup__form'));
     formList.forEach((formElement) => {
     formElement.addEventListener('submit', (evt) => {
@@ -41,4 +49,4 @@ const enableValidation = () => {
   });
 };
 
-enableValidation();
+enableValidation1();
