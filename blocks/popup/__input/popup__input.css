@@ -20,6 +20,7 @@
 
 .popup__input:invalid {
     border-bottom: 1px solid red;
+    color: #FF0000;
 } 
 
 @media screen and (max-width: 767px) {
