@@ -7,4 +7,12 @@
     color: #FF0000;
     margin-left: 36px;
     margin-right: 36px;
+    display: block;
+}
+
+@media screen and (max-width: 767px) {
+    .popup__input-error {
+        margin-left: 22px;
+        margin-right: 22px;
+    }
 }
