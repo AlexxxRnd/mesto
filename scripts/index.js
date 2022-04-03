@@ -110,7 +110,7 @@ editButton.addEventListener('click', () => {
 closeButton.addEventListener('click', function (evt) {
     closePopup(evt.target.closest('.popup'));
 });
-//подумать и переделать
+
 currentPopup.forEach(el => el.addEventListener('click', function (evt) {
     if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-btn')) {
         closePopup(evt.currentTarget);
