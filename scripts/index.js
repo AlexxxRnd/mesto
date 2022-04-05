@@ -101,7 +101,7 @@ function handleAddImageFormSubmit() {
     //evt.preventDefault();
     addCard(mestoInput.value, linkInput.value);
     closePopup(popupAddForm);
-    formElementAdd.reset();
+    //formElementAdd.reset();
 };
 
 function handleEscButton(evt) {
@@ -115,6 +115,7 @@ initialCards.forEach(function (element) {
 });
 
 popupAddButton.addEventListener('click', () => {
+    formElementAdd.reset();
     showPopup(popupAddForm);
 });
 
