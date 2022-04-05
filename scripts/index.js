@@ -56,6 +56,9 @@ function showPopup(popup) {
 function closePopup(popup) {
     popup.classList.remove('popup_opened');
     document.removeEventListener('keydown', handleEscButton);
+    if (popup === popupImg) {
+        popupImg.classList.remove('popup_img-open');
+    }
 };
 
 function handleProfileFormSubmit(evt) {
@@ -83,6 +86,7 @@ function createCard(nameValue, linkValue) {
         imgSrc.src = linkValue;
         imgSrc.alt = nameValue;
         titleImgPopup.textContent = nameValue;
+        popupImg.classList.add('popup_img-open');
         showPopup(popupImg);
     });
 
