@@ -3,17 +3,18 @@ const objValidation = {
     inputElement: '.popup__input',
     submitButtonSelector: '.popup__save-btn',
     inactiveButtonClass: 'popup__save-btn_disabled',
+    inputErrorClass: 'popup__input_type-error',
 };
 
 const showInputError = (formElement, inputElement, errorMessage) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-    inputElement.classList.add('popup__input_type-error');
+    inputElement.classList.add(inputErrorClass);
     errorElement.textContent = errorMessage;
 };
 
 const hideInputError = (formElement, inputElement) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-    inputElement.classList.remove('popup__input_type-error');
+    inputElement.classList.remove(inputErrorClass);
     errorElement.textContent = '';
 };
 
