@@ -5,6 +5,6 @@
     object-fit: cover;
 }
 
-.element__photo {
+.element__photo:hover {
     cursor: pointer;
 }
