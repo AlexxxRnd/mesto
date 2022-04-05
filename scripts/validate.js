@@ -3,15 +3,20 @@ const objValidation = {
     inputElement: '.popup__input',
     submitButtonSelector: '.popup__save-btn',
     inactiveButtonClass: 'popup__save-btn_disabled',
+
+    inputErrorClass: 'popup__input_type-error',
+    errorClass: 'popup__error_visible'
 };
 
 const showInputError = (formElement, inputElement, errorMessage) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+    inputElement.classList.add('popup__input_type-error');
     errorElement.textContent = errorMessage;
 };
 
 const hideInputError = (formElement, inputElement) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+    inputElement.classList.remove('popup__input_type-error');
     errorElement.textContent = '';
 };
 
@@ -53,10 +58,10 @@ const hasInvalidInput = (inputList) => {
 
 const toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
     if (hasInvalidInput(inputList)) {
+        buttonElement.setAttribute("disabled", "disabled");
         buttonElement.classList.add(inactiveButtonClass);
     } else {
+        buttonElement.removeAttribute("disabled", "disabled");
         buttonElement.classList.remove(inactiveButtonClass);
     };
 };
-
-enableValidation(objValidation);

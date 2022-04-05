@@ -4,9 +4,9 @@
     height: 75vh;
 }
 
-@media screen and (max-width: 767px) {
+/* @media screen and (max-width: 767px) {
     .popup__image {
         width: 240px;
         height: 299px;
     }
-}
+} */
