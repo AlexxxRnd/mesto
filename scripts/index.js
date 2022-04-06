@@ -2,8 +2,8 @@ const popupEditButton = document.querySelector('.profile__edit-btn');
 const popupAddButton = document.querySelector('.profile__add-btn');
 const popupCloseButton = document.querySelector('.popup__close-btn');
 
-const errorTextList = document.querySelectorAll('.popup__input-error');
-const inputTypeErrorList = document.querySelectorAll('.popup__input_type-error');
+//const errorTextList = document.querySelectorAll('.popup__input-error');
+//const inputTypeErrorList = document.querySelectorAll('.popup__input_type-error');
 
 const popupCurrentList = document.querySelectorAll('.popup');
 const imgSrc = document.querySelector('.popup__image');
@@ -115,22 +115,27 @@ function disableSaveButton() {
     popupAddSavebtn.setAttribute("disabled", "disabled");
 }
 
-function resetInputErrorText() {
-    errorTextList.forEach(el => el.textContent = '');
-    inputTypeErrorList.forEach(el => el.classList.remove('popup__input_type-error'));
+// function resetInputErrorText() {
+//     errorTextList.forEach(el => el.textContent = '');
+//     inputTypeErrorList.forEach(el => el.classList.remove('popup__input_type-error'));
+// }
+
+function resetInputErrorText(popup) {
+    popup.querySelectorAll('.popup__input-error').forEach(el => el.textContent = '');
+    popup.querySelectorAll('.popup__input_type-error').forEach(el => el.classList.remove('popup__input_type-error'));
 }
 
 popupAddButton.addEventListener('click', () => {
     formElementAdd.reset();
     disableSaveButton();
-    resetInputErrorText();
+    resetInputErrorText(popupAddForm);
     showPopup(popupAddForm);
 });
 
 popupEditButton.addEventListener('click', () => {
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent;
-    resetInputErrorText();
+    resetInputErrorText(popupEditForm);
     showPopup(popupEditForm);
 });
 
