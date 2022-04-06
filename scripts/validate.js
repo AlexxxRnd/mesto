@@ -6,34 +6,34 @@ const objValidation = {
     inputErrorClass: 'popup__input_type-error',
 };
 
-const showInputError = (formElement, inputElement, errorMessage) => {
+const showInputError = (formElement, inputElement, errorMessage, inputErrorClass) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.add(inputErrorClass);
     errorElement.textContent = errorMessage;
 };
 
-const hideInputError = (formElement, inputElement) => {
+const hideInputError = (formElement, inputElement, inputErrorClass) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.remove(inputErrorClass);
     errorElement.textContent = '';
 };
 
-const checkInputValidity = (formElement, inputElement) => {
+const checkInputValidity = (formElement, inputElement, inputErrorClass) => {
     if (!inputElement.validity.valid) {
-        showInputError(formElement, inputElement, inputElement.validationMessage);
+        showInputError(formElement, inputElement, inputElement.validationMessage, inputErrorClass);
     } else {
-        hideInputError(formElement, inputElement);
+        hideInputError(formElement, inputElement, inputErrorClass);
     }
 };
 
-const setEventListeners = (formElement, { inputElement, submitButtonSelector, inactiveButtonClass, ...rest }) => {
+const setEventListeners = (formElement, { inputElement, submitButtonSelector, inactiveButtonClass }) => {
     const inputList = Array.from(formElement.querySelectorAll(inputElement));
     const buttonElement = formElement.querySelector(submitButtonSelector);
     toggleButtonState(inputList, buttonElement, inactiveButtonClass);
     inputList.forEach((inputElement) => {
         inputElement.addEventListener('input', function () {
-            toggleButtonState(inputList, buttonElement, inactiveButtonClass);
             checkInputValidity(formElement, inputElement);
+            toggleButtonState(inputList, buttonElement, inactiveButtonClass);
         });
     });
 };
@@ -63,3 +63,5 @@ const toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
         buttonElement.classList.remove(inactiveButtonClass);
     };
 };
+
+enableValidation(objValidation);

@@ -2,7 +2,7 @@ const popupEditButton = document.querySelector('.profile__edit-btn');
 const popupAddButton = document.querySelector('.profile__add-btn');
 const popupCloseButton = document.querySelector('.popup__close-btn');
 
-const popupCurrent = document.querySelectorAll('.popup');
+const popupCurrentList = document.querySelectorAll('.popup');
 const imgSrc = document.querySelector('.popup__image');
 const titleImgPopup = document.querySelector('.popup__title-img');
 const elementTemplate = document.querySelector('#element-template').content;
@@ -48,7 +48,6 @@ const initialCards = [
 ];
 
 function showPopup(popup) {
-    enableValidation(objValidation);
     popup.classList.add('popup_opened');
     document.addEventListener('keydown', handleEscButton);
 };
@@ -56,13 +55,9 @@ function showPopup(popup) {
 function closePopup(popup) {
     popup.classList.remove('popup_opened');
     document.removeEventListener('keydown', handleEscButton);
-    if (popup === popupImg) {
-        popupImg.classList.remove('popup_img-open');
-    }
 };
 
 function handleProfileFormSubmit(evt) {
-    //evt.preventDefault();
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
     closePopup(popupEditForm);
@@ -86,7 +81,6 @@ function createCard(nameValue, linkValue) {
         imgSrc.src = linkValue;
         imgSrc.alt = nameValue;
         titleImgPopup.textContent = nameValue;
-        popupImg.classList.add('popup_img-open');
         showPopup(popupImg);
     });
 
@@ -98,10 +92,8 @@ function addCard(nameValue, linkValue) {
 };
 
 function handleAddImageFormSubmit() {
-    //evt.preventDefault();
     addCard(mestoInput.value, linkInput.value);
     closePopup(popupAddForm);
-    //formElementAdd.reset();
 };
 
 function handleEscButton(evt) {
@@ -129,7 +121,7 @@ popupCloseButton.addEventListener('click', function (evt) {
     closePopup(evt.target.closest('.popup'));
 });
 
-popupCurrent.forEach(el => el.addEventListener('click', function (evt) {
+popupCurrentList.forEach(el => el.addEventListener('click', function (evt) {
     if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-btn')) {
         closePopup(evt.currentTarget);
     }
