@@ -2,6 +2,9 @@ const popupEditButton = document.querySelector('.profile__edit-btn');
 const popupAddButton = document.querySelector('.profile__add-btn');
 const popupCloseButton = document.querySelector('.popup__close-btn');
 
+const errorTextList = document.querySelectorAll('.popup__input-error');
+const inputTypeErrorList = document.querySelectorAll('.popup__input_type-error');
+
 const popupCurrentList = document.querySelectorAll('.popup');
 const imgSrc = document.querySelector('.popup__image');
 const titleImgPopup = document.querySelector('.popup__title-img');
@@ -9,6 +12,7 @@ const elementTemplate = document.querySelector('#element-template').content;
 const popupEditForm = document.getElementById('popup_editProfile');
 const popupAddForm = document.getElementById('popup_addCard');
 const popupImg = document.getElementById('popup_img');
+const popupAddSavebtn = document.getElementById('popup_addCard_save-btn');
 
 const profileForm = document.querySelector('.popup__form');
 const formElementAdd = document.querySelector('.popup__form_add');
@@ -106,14 +110,27 @@ initialCards.forEach(function (element) {
     addCard(element.name, element.link);
 });
 
+function disableSaveButton() {
+    popupAddSavebtn.classList.add('popup__save-btn_disabled');
+    popupAddSavebtn.setAttribute("disabled", "disabled");
+}
+
+function resetInputErrorText() {
+    errorTextList.forEach(el => el.textContent = '');
+    inputTypeErrorList.forEach(el => el.classList.remove('popup__input_type-error'));
+}
+
 popupAddButton.addEventListener('click', () => {
     formElementAdd.reset();
+    disableSaveButton();
+    resetInputErrorText();
     showPopup(popupAddForm);
 });
 
 popupEditButton.addEventListener('click', () => {
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent;
+    resetInputErrorText();
     showPopup(popupEditForm);
 });
 

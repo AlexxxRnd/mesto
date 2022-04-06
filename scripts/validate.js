@@ -26,13 +26,13 @@ const checkInputValidity = (formElement, inputElement, inputErrorClass) => {
     }
 };
 
-const setEventListeners = (formElement, { inputElement, submitButtonSelector, inactiveButtonClass }) => {
+const setEventListeners = (formElement, { inputElement, submitButtonSelector, inactiveButtonClass, inputErrorClass }) => {
     const inputList = Array.from(formElement.querySelectorAll(inputElement));
     const buttonElement = formElement.querySelector(submitButtonSelector);
     toggleButtonState(inputList, buttonElement, inactiveButtonClass);
     inputList.forEach((inputElement) => {
         inputElement.addEventListener('input', function () {
-            checkInputValidity(formElement, inputElement);
+            checkInputValidity(formElement, inputElement, inputErrorClass);
             toggleButtonState(inputList, buttonElement, inactiveButtonClass);
         });
     });
