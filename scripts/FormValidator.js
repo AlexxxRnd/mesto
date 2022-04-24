@@ -2,8 +2,6 @@ export class FormValidator {
     constructor(objValidation, formEl) {
         this._objValidation = objValidation;
         this._form = formEl;
-        this._inputList = Array.from(this._form.querySelectorAll(this._objValidation.inputElement));
-        this._buttonElement = this._form.querySelector(this._objValidation.submitButtonSelector);
     }
 
     _showInputError(inputElement, errorMessage) {
@@ -27,6 +25,8 @@ export class FormValidator {
     };
 
     _setEventListeners() {
+        this._inputList = Array.from(this._form.querySelectorAll(this._objValidation.inputElement));
+        this._buttonElement = this._form.querySelector(this._objValidation.submitButtonSelector);
         this._toggleButtonState();
         this._inputList.forEach((inputElement) => {
             inputElement.addEventListener('input', () => {
