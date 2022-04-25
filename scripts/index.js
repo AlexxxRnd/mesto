@@ -64,10 +64,14 @@ function handleProfileFormSubmit(evt) {
     closePopup(popupEditForm);
 };
 
-function addCard(nameValue, linkValue) {
+function createCard(nameValue, linkValue) {
     const card = new Card(nameValue, linkValue, '#element-template');
-    cardsContainer.prepend(card.createCard());
+    return card.createCard();
 };
+
+function addCard(nameValue, linkValue) {
+    cardsContainer.prepend(createCard(nameValue, linkValue));
+}
 
 initialCards.forEach(function (element) {
     addCard(element.name, element.link);
@@ -84,27 +88,17 @@ function handleEscButton(evt) {
     };
 };
 
-function disableSaveButton() {
-    popupAddSavebtn.classList.add('popup__save-btn_disabled');
-    popupAddSavebtn.setAttribute("disabled", "disabled");
-}
-
-function resetInputErrorText(popup) {
-    popup.querySelectorAll('.popup__input-error').forEach(el => el.textContent = '');
-    popup.querySelectorAll('.popup__input_type-error').forEach(el => el.classList.remove('popup__input_type-error'));
-}
-
 popupAddButton.addEventListener('click', () => {
     formElementAdd.reset();
-    disableSaveButton();
-    resetInputErrorText(popupAddForm);
+    formAddValidator.toggleButtonDisabled();
+    formAddValidator.resetErrors();
     showPopup(popupAddForm);
 });
 
 popupEditButton.addEventListener('click', () => {
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent;
-    resetInputErrorText(popupEditForm);
+    formEditValidator.resetErrors();
     showPopup(popupEditForm);
 });
 
