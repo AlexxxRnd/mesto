@@ -1,10 +1,8 @@
-import { showPopup } from './index.js';
-const popupImg = document.getElementById('popup_img');
-
 export default class Card {
-    constructor(data, template) {
+    constructor({ data, handleCardClick }, template) {
         this._title = data.name;
         this._img = data.link;
+        this._handleCardClick = handleCardClick;
         this._template = template;
     }
 
@@ -27,14 +25,6 @@ export default class Card {
         return this._element;
     }
 
-    _handleShowImg() {
-        const imgSrc = document.querySelector('.popup__image');
-        imgSrc.src = this._img;
-        imgSrc.alt = this._title;
-        document.querySelector('.popup__title-img').textContent = this._title;
-        showPopup(popupImg);
-    }
-
     _handleDeleteCard() {
         this._element.remove();
         this._element = null;
@@ -48,7 +38,7 @@ export default class Card {
             evt.target.classList.toggle('element__like-btn_active');
         });
         this._elPhoto.addEventListener('click', () => {
-            this._handleShowImg();
+            this._handleCardClick((this._title, this._img));
         });
     }
 }
