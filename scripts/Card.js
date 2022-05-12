@@ -1,10 +1,10 @@
 import { showPopup } from './index.js';
 const popupImg = document.getElementById('popup_img');
 
-export class Card {
-    constructor(title, img, template) {
-        this._title = title;
-        this._img = img;
+export default class Card {
+    constructor(data, template) {
+        this._title = data.name;
+        this._img = data.link;
         this._template = template;
     }
 
