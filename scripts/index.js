@@ -21,6 +21,19 @@ import {
     initialCards
 } from './constants.js';
 
+function renderCard(cardData) {
+    const cardElement = new Card(cardData, '#element-template');
+    section.addItem(cardElement.createCard());
+}
+
+const section = new Section({ items: initialCards, renderer: renderCard }, '.elements');
+section.renderItems();
+
+function handleAddImageFormSubmit() {
+    renderCard([{ mestoInput, linkInput }]);
+    closePopup(popupAddForm);
+};
+
 export function showPopup(popup) {
     popup.classList.add('popup_opened');
     document.addEventListener('keydown', handleEscButton);
@@ -35,39 +48,6 @@ function handleProfileFormSubmit(evt) {
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
     closePopup(popupEditForm);
-};
-
-// const cardsList = new Section({
-//     renderer: () => {
-//         const ncard = new Card(data, '#element-template');
-//         cardsList.addItem(ncard.createCard());
-//     },
-// }, '.elements');
-
-function renderCard(cardData) {
-    const cardElement = new Card(cardData, '#element-template');
-    section.addItem(cardElement.createCard());
-  }
-
-const section = new Section({items: initialCards, renderer: renderCard}, '.elements')
-section.renderItems()
-
-//function createCard(nameValue, linkValue) {
-//    const card = new Card(nameValue, linkValue, '#element-template');
-//    return card.createCard();
-//};
-
-//function addCard(nameValue, linkValue) {
-//    cardsContainer.prepend(createCard(nameValue, linkValue));
-//}
-
-//initialCards.forEach(function (element) {
-//    addCard(element.name, element.link);
-//});
-
-function handleAddImageFormSubmit() {
-    addCard(mestoInput.value, linkInput.value);
-    closePopup(popupAddForm);
 };
 
 function handleEscButton(evt) {
