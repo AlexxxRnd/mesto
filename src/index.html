@@ -4,19 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="pages/index.css" />
     <title>Место</title>
 </head>
 
 <body class="body-page">
     <div class="page">
         <header class="header">
-            <img class="header__logo" src="images/logo.svg" alt="логотип">
+            <img class="header__logo" src="<%=require('./images/logo.svg')%>" alt="логотип">
         </header>
 
         <main class="content">
             <section class="profile">
-                <img class="profile__avatar" src="images/avatar.svg" alt="аватар">
+                <img class="profile__avatar" src="<%=require('./images/avatar.svg')%>" alt="аватар">
                 <div class="profile__info">
                     <h1 class="profile__name">Жак-Ив Кусто</h1>
                     <button aria-label="Редактировать информацию" class="profile__edit-btn" type="button"></button>
@@ -35,7 +34,7 @@
     <template id="element-template">
         <article class="element">
             <button aria-label="Удалить" class="element__delete-btn" type="button">
-                <img src="./images/trash.svg" alt="удалить" class="element__trash">
+                <img src="<%=require('./images/trash.svg')%>" alt="удалить" class="element__trash">
             </button>
             <img class="element__photo" src=" ">
             <div class="element__info">
@@ -85,7 +84,6 @@
         </div>
     </div>
 
-    <script type="module" src="pages/index.js"></script>
 </body>
 
 </html>
