@@ -11,8 +11,6 @@ import {
     popupAddButton,
     popupEditForm,
     popupAddForm,
-    mestoInput,
-    linkInput,
     objValidation,
     initialCards,
     nameInput,
@@ -24,29 +22,22 @@ const user = new UserInfo({ username: '.profile__name', job: '.profile__subname'
 const openPopupImg = new PopupWithImage('popup_img');
 const openPopupAddFrom = new PopupWithForm({
     popupSelector: 'popup_addCard',
-    handleFormSubmit: () => {
-        renderCard([{ mestoInput, linkInput }]);
+    handleFormSubmit: (data) => {
+        section.addItem(renderCard({ name: data.mestoInput, link: data.urlInput }));
         openPopupAddFrom.close();
     }
 });
 
 const openPopupEditForm = new PopupWithForm({
     popupSelector: 'popup_editProfile',
-    handleFormSubmit: () => {
-        user.setUserInfo(nameInput.value, jobInput.value);
+    handleFormSubmit: (data) => {
+        user.setUserInfo(data);
         openPopupEditForm.close();
     }
 });
 
 const formEditValidator = new FormValidator(objValidation, popupEditForm);
 const formAddValidator = new FormValidator(objValidation, popupAddForm);
-
-formEditValidator.enableValidation();
-formAddValidator.enableValidation();
-
-openPopupImg.setEventListeners();
-openPopupAddFrom.setEventListeners();
-openPopupEditForm.setEventListeners();
 
 section.renderItems();
 
@@ -57,8 +48,15 @@ function renderCard(cardData) {
             openPopupImg.open(cardData.name, cardData.link);
         },
     }, '#element-template');
-    section.addItem(cardElement.createCard());
+    return cardElement.createCard();
 }
+
+formEditValidator.enableValidation();
+formAddValidator.enableValidation();
+
+openPopupImg.setEventListeners();
+openPopupAddFrom.setEventListeners();
+openPopupEditForm.setEventListeners();
 
 popupAddButton.addEventListener('click', () => {
     formAddValidator.toggleButtonDisabled();

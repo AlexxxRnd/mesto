@@ -30,12 +30,16 @@ export default class Card {
         this._element = null;
     }
 
+    _toggleLikeButton(evt) {
+        evt.target.classList.toggle('element__like-btn_active');
+    }
+
     _setEventListeners() {
         this._element.querySelector('.element__delete-btn').addEventListener('click', () => {
             this._handleDeleteCard();
         });
-        this._element.querySelector('.element__like-btn').addEventListener('click', function (evt) {
-            evt.target.classList.toggle('element__like-btn_active');
+        this._element.querySelector('.element__like-btn').addEventListener('click', (evt) => {
+           this._toggleLikeButton(evt);
         });
         this._elPhoto.addEventListener('click', () => {
             this._handleCardClick((this._title, this._img));
