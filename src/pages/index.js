@@ -4,7 +4,9 @@ import FormValidator from '../components/FormValidator.js';
 import Section from '../components/section.js';
 import PopupWithImage from '../components/popupWithImage.js';
 import PopupWithForm from '../components/popupWithForm.js';
+import PopupWithSubmit from '../components/PopupWithSubmit.js';
 import UserInfo from '../components/UserInfo.js';
+import Api from '../components/Api.js';
 
 import {
     popupEditButton,
@@ -12,18 +14,39 @@ import {
     popupEditForm,
     popupAddForm,
     objValidation,
-    initialCards,
     nameInput,
     jobInput,
 } from '../scripts/constants.js';
 
-const section = new Section({ items: initialCards, renderer: renderCard }, '.elements');
-const user = new UserInfo({ username: '.profile__name', job: '.profile__subname' });
+let user_Id;
+
+const section = new Section({ renderer: renderCard }, '.elements');
+
+const api = new Api({
+    url: 'https://mesto.nomoreparties.co/v1/cohort-41',
+    header: {
+        authorization: '6e85cbb9-d07a-454d-87dc-f5801edbeaad',
+        'Content-Type': 'application/json'
+    }
+});
+
+Promise.all([api.getInitialCards(), api.getUserInfo()])
+    .then(([initialCards, userData]) => {
+        user.setUserInfo(userData);
+        user_Id = userData._id;
+        section.renderItems(initialCards);
+    })
+    .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+    });
+
+const user = new UserInfo({ username: '.profile__name', job: '.profile__subname', avatar: '.profile__avatar' });
 const openPopupImg = new PopupWithImage('popup_img');
+
 const openPopupAddFrom = new PopupWithForm({
     popupSelector: 'popup_addCard',
     handleFormSubmit: (data) => {
-        section.addItem(renderCard({ name: data.mestoInput, link: data.urlInput }));
+        //section.addItem(renderCard({ name: data.mestoInput, link: data.urlInput }));
         openPopupAddFrom.close();
     }
 });
@@ -39,8 +62,6 @@ const openPopupEditForm = new PopupWithForm({
 const formEditValidator = new FormValidator(objValidation, popupEditForm);
 const formAddValidator = new FormValidator(objValidation, popupAddForm);
 
-section.renderItems();
-
 function renderCard(cardData) {
     const cardElement = new Card({
         data: cardData,
@@ -48,7 +69,7 @@ function renderCard(cardData) {
             openPopupImg.open(cardData.name, cardData.link);
         },
     }, '#element-template');
-    return cardElement.createCard();
+    return section.addItem(cardElement.createCard());
 }
 
 formEditValidator.enableValidation();

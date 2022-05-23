@@ -39,7 +39,7 @@ export default class Card {
             this._handleDeleteCard();
         });
         this._element.querySelector('.element__like-btn').addEventListener('click', (evt) => {
-           this._toggleLikeButton(evt);
+            this._toggleLikeButton(evt);
         });
         this._elPhoto.addEventListener('click', () => {
             this._handleCardClick((this._title, this._img));
