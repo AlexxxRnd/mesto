@@ -12,15 +12,23 @@ import {
     popupEditButton,
     popupAddButton,
     popupEditForm,
+    popupAvatarForm,
+    avatarButton,
     popupAddForm,
     objValidation,
     nameInput,
     jobInput,
+    avatar,
 } from '../scripts/constants.js';
 
 let user_Id;
 
 const section = new Section({ renderer: renderCard }, '.elements');
+const user = new UserInfo({ username: '.profile__name', job: '.profile__subname', avatar: '.profile__avatar' });
+
+const openPopupImg = new PopupWithImage('popup_img');
+const openPopupEditAvatar = new PopupWithSubmit('popup_edit_avatar');
+//const openDeleteConfirmPopup = new PopupWithSubmit('popup_delete');
 
 const api = new Api({
     url: 'https://mesto.nomoreparties.co/v1/cohort-41',
@@ -40,28 +48,6 @@ Promise.all([api.getInitialCards(), api.getUserInfo()])
         console.log(`Ошибка: ${err}`);
     });
 
-const user = new UserInfo({ username: '.profile__name', job: '.profile__subname', avatar: '.profile__avatar' });
-const openPopupImg = new PopupWithImage('popup_img');
-
-const openPopupAddFrom = new PopupWithForm({
-    popupSelector: 'popup_addCard',
-    handleFormSubmit: (data) => {
-        //section.addItem(renderCard({ name: data.mestoInput, link: data.urlInput }));
-        openPopupAddFrom.close();
-    }
-});
-
-const openPopupEditForm = new PopupWithForm({
-    popupSelector: 'popup_editProfile',
-    handleFormSubmit: (data) => {
-        user.setUserInfo(data);
-        openPopupEditForm.close();
-    }
-});
-
-const formEditValidator = new FormValidator(objValidation, popupEditForm);
-const formAddValidator = new FormValidator(objValidation, popupAddForm);
-
 function renderCard(cardData) {
     const cardElement = new Card({
         data: cardData,
@@ -72,12 +58,35 @@ function renderCard(cardData) {
     return section.addItem(cardElement.createCard());
 }
 
+const openPopupAddFrom = new PopupWithForm({
+    popupSelector: 'popup_addCard',
+    handleFormSubmit: (data) => {
+        section.addItem(renderCard({ name: data.mestoInput, link: data.urlInput }));
+        openPopupAddFrom.close();
+    }
+});
+
+const openPopupEditForm = new PopupWithForm({
+    popupSelector: 'popup_editProfile',
+    handleFormSubmit: (data) => {
+        //user.setUserInfo(data);
+        api.setUserInfo(data);
+        openPopupEditForm.close();
+    }
+});
+
+const formEditValidator = new FormValidator(objValidation, popupEditForm);
+const formAddValidator = new FormValidator(objValidation, popupAddForm);
+const formAvatarValidator = new FormValidator(objValidation, popupAvatarForm);
+
 formEditValidator.enableValidation();
 formAddValidator.enableValidation();
+formAvatarValidator.enableValidation();
 
 openPopupImg.setEventListeners();
 openPopupAddFrom.setEventListeners();
 openPopupEditForm.setEventListeners();
+openPopupEditAvatar.setEventListeners();
 
 popupAddButton.addEventListener('click', () => {
     formAddValidator.toggleButtonDisabled();
@@ -91,4 +100,9 @@ popupEditButton.addEventListener('click', () => {
     nameInput.value = userInfo.name;
     jobInput.value = userInfo.job;
     openPopupEditForm.open();
+});
+
+avatarButton.addEventListener('click', () => {
+    avatar.value = user.getUserInfo().avatar;
+    openPopupEditAvatar.open();
 });

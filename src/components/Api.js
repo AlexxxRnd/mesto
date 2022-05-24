@@ -21,10 +21,21 @@ export default class Api {
 
     getUserInfo() {
         return fetch(`${this._url}/users/me`, {
-          headers: this._header
+            headers: this._header
         })
-          .then(res => this._getResponse(res));
-      }
+            .then(res => this._getResponse(res));
+    }
 
-      
+    setUserInfo(data) {
+        return fetch(`${this._url}/users/me`, {
+            method: 'PATCH',
+            headers: this._header,
+            body: JSON.stringify({
+                name: data.name,
+                about: data.about
+            })
+        })
+            .then(res => this._getResponse(res));
+    }
+
 }
