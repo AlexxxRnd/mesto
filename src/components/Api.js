@@ -38,4 +38,27 @@ export default class Api {
             .then(res => this._getResponse(res));
     }
 
+    setUserAvatar(data) {
+        return fetch(`${this._url}/users/me/avatar`, {
+            method: 'PATCH',
+            headers: this._header,
+            body: JSON.stringify({
+                avatar: data.avatar,
+            })
+        })
+            .then(res => this._getResponse(res));
+    }
+
+    addCard(data) {
+        return fetch(`${this._url}/cards`, {
+            method: 'POST',
+            headers: this._header,
+            body: JSON.stringify({
+                name: data.name,
+                link: data.link
+            })
+        })
+            .then(res => this._getResponse(res));
+    }
+
 }

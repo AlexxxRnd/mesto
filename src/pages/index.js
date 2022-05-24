@@ -27,7 +27,7 @@ const section = new Section({ renderer: renderCard }, '.elements');
 const user = new UserInfo({ username: '.profile__name', job: '.profile__subname', avatar: '.profile__avatar' });
 
 const openPopupImg = new PopupWithImage('popup_img');
-const openPopupEditAvatar = new PopupWithSubmit('popup_edit_avatar');
+
 //const openDeleteConfirmPopup = new PopupWithSubmit('popup_delete');
 
 const api = new Api({
@@ -40,6 +40,7 @@ const api = new Api({
 
 Promise.all([api.getInitialCards(), api.getUserInfo()])
     .then(([initialCards, userData]) => {
+        console.log(userData)
         user.setUserInfo(userData);
         user_Id = userData._id;
         section.renderItems(initialCards);
@@ -58,18 +59,28 @@ function renderCard(cardData) {
     return section.addItem(cardElement.createCard());
 }
 
+const openPopupEditAvatar = new PopupWithForm({
+    popupSelector: 'popup_edit_avatar',
+    handleFormSubmit: (data) => {
+        api.setUserAvatar(data)
+        openPopupEditAvatar.close();
+    }
+});
+
 const openPopupAddFrom = new PopupWithForm({
     popupSelector: 'popup_addCard',
     handleFormSubmit: (data) => {
-        section.addItem(renderCard({ name: data.mestoInput, link: data.urlInput }));
-        openPopupAddFrom.close();
+        api.addCard(data)
+            .then((data) => {
+                renderCard(data);
+                openPopupAddFrom.close();
+            })
     }
 });
 
 const openPopupEditForm = new PopupWithForm({
     popupSelector: 'popup_editProfile',
     handleFormSubmit: (data) => {
-        //user.setUserInfo(data);
         api.setUserInfo(data);
         openPopupEditForm.close();
     }
