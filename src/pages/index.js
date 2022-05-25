@@ -28,7 +28,11 @@ const user = new UserInfo({ username: '.profile__name', job: '.profile__subname'
 
 const openPopupImg = new PopupWithImage('popup_img');
 
-//const openDeleteConfirmPopup = new PopupWithSubmit('popup_delete');
+const openDeleteConfirmPopup = new PopupWithSubmit({
+    popupSelector: 'popup_delete',
+});
+
+openDeleteConfirmPopup.setEventListeners();
 
 const api = new Api({
     url: 'https://mesto.nomoreparties.co/v1/cohort-41',
@@ -40,21 +44,46 @@ const api = new Api({
 
 Promise.all([api.getInitialCards(), api.getUserInfo()])
     .then(([initialCards, userData]) => {
-        console.log(userData)
         user.setUserInfo(userData);
         user_Id = userData._id;
         section.renderItems(initialCards);
     })
-    .catch((err) => {
-        console.log(`Ошибка: ${err}`);
-    });
+//.catch((err) => {
+//   console.log(`Ошибка: ${err}`);
+//});
 
 function renderCard(cardData) {
     const cardElement = new Card({
+        userId: user_Id,
         data: cardData,
         handleCardClick: () => {
             openPopupImg.open(cardData.name, cardData.link);
         },
+        handleCardDelete: (cardId) => {
+            openDeleteConfirmPopup.open();
+            openDeleteConfirmPopup.handleCallback(() => {
+                api.deleteCard(cardId)
+                    .then(() => {
+                        openDeleteConfirmPopup.close();
+                        cardElement.deleteCard();
+                    })
+                //.catch((err) => {
+                //   console.log(`Ошибка: ${err}`);
+                // });
+            });
+        },
+        handleCardLike: (cardId) => {
+            api.likeCard(cardId)
+                .then((data) => {
+                    cardElement.handleShowLikesCard(data);
+                });
+        },
+        handleCardUnlike: (cardId) => {
+            api.unlikeCard(cardId)
+                .then((data) => {
+                    cardElement.handleShowLikesCard(data)
+                });
+        }
     }, '#element-template');
     return section.addItem(cardElement.createCard());
 }

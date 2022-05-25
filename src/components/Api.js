@@ -61,4 +61,28 @@ export default class Api {
             .then(res => this._getResponse(res));
     }
 
+    deleteCard(data) {
+        return fetch(`${this._url}/cards/${data}`, {
+            method: 'DELETE',
+            headers: this._header
+        })
+            .then(res => this._getResponse(res));
+    }
+
+
+    likeCard(data) {
+        return fetch(`${this._url}/cards/${data}/likes`, {
+            method: 'PUT',
+            headers: this._header
+        })
+            .then(res => this._getResponse(res));
+    }
+
+    unlikeCard(data) {
+        return fetch(`${this._url}/cards/${data}/likes`, {
+            method: 'DELETE',
+            headers: this._header
+        })
+            .then(res => this._getResponse(res));
+    }
 }
