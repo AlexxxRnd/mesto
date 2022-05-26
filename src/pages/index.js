@@ -40,9 +40,9 @@ Promise.all([api.getInitialCards(), api.getUserInfo()])
         user_Id = userData._id;
         section.renderItems(initialCards.reverse());
     })
-//.catch((err) => {
-//   console.log(`Ошибка: ${err}`);
-//});
+    .catch((error) => {
+        console.log(`Ошибка: ${error}`);
+    });
 
 function renderCard(cardData) {
     const cardElement = new Card({
@@ -54,26 +54,36 @@ function renderCard(cardData) {
         handleCardDelete: (cardId) => {
             openDeleteConfirmPopup.open();
             openDeleteConfirmPopup.handleCallback(() => {
+                openDeleteConfirmPopup.loading(true);
                 api.deleteCard(cardId)
                     .then(() => {
                         openDeleteConfirmPopup.close();
                         cardElement.deleteCard();
                     })
-                //.catch((err) => {
-                //   console.log(`Ошибка: ${err}`);
-                // });
+                    .catch((error) => {
+                        console.log(`Ошибка: ${error}`);
+                    })
+                    .finally(() => {
+                        openDeleteConfirmPopup.loading(false);
+                    })
             });
         },
         handleCardLike: (cardId) => {
             api.likeCard(cardId)
                 .then((data) => {
                     cardElement.handleShowLikesCard(data);
+                })
+                .catch((error) => {
+                    console.log(`Ошибка: ${error}`);
                 });
         },
         handleCardUnlike: (cardId) => {
             api.unlikeCard(cardId)
                 .then((data) => {
                     cardElement.handleShowLikesCard(data)
+                })
+                .catch((error) => {
+                    console.log(`Ошибка: ${error}`);
                 });
         }
     }, '#element-template');
@@ -87,18 +97,35 @@ const openDeleteConfirmPopup = new PopupWithSubmit({ popupSelector: 'popup_delet
 const openPopupEditAvatar = new PopupWithForm({
     popupSelector: 'popup_edit_avatar',
     handleFormSubmit: (data) => {
+        openPopupEditAvatar.loading(true);
         api.setUserAvatar(data)
-        openPopupEditAvatar.close();
+            .then((data) => {
+                user.setUserInfo(data);
+                openPopupEditAvatar.close();
+            })
+            .catch((error) => {
+                console.log(`Ошибка: ${error}`);
+            })
+            .finally(() => {
+                openPopupEditAvatar.loading(false);
+            })
     }
 });
 
 const openPopupAddFrom = new PopupWithForm({
     popupSelector: 'popup_addCard',
     handleFormSubmit: (data) => {
+        openPopupAddFrom.loading(true);
         api.addCard(data)
             .then((data) => {
                 renderCard(data);
                 openPopupAddFrom.close();
+            })
+            .catch((error) => {
+                console.log(`Ошибка: ${error}`);
+            })
+            .finally(() => {
+                openPopupAddFrom.loading(false);
             })
     }
 });
@@ -106,8 +133,18 @@ const openPopupAddFrom = new PopupWithForm({
 const openPopupEditForm = new PopupWithForm({
     popupSelector: 'popup_editProfile',
     handleFormSubmit: (data) => {
-        api.setUserInfo(data);
-        openPopupEditForm.close();
+        openPopupEditForm.loading(true);
+        api.setUserInfo(data)
+            .then((data) => {
+                user.setUserInfo(data);
+                openPopupEditForm.close();
+            })
+            .catch((error) => {
+                console.log(`Ошибка: ${error}`);
+            })
+            .finally(() => {
+                openPopupEditForm.loading(false);
+            })
     }
 });
 

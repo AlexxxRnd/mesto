@@ -32,6 +32,7 @@ export default class Card {
         this._elPhoto.alt = this._title;
         this._element.querySelector('.element__like-count').textContent = this._likes.length;
         this._setEventListeners();
+        this._isCardLiked();
         this._showDeleteBtn();
         return this._element;
     }
@@ -58,6 +59,14 @@ export default class Card {
             this._handleCardUnlike(this._cardId);
         } else {
             this._handleCardLike(this._cardId);
+        }
+    }
+
+    _isCardLiked() {
+        if (this._likes.some((data) => {
+            return this._userId === data._id;
+        })) {
+            this._likeBtn.classList.add('element__like-btn_active');
         }
     }
 
