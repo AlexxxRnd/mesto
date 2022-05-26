@@ -26,14 +26,6 @@ let user_Id;
 const section = new Section({ renderer: renderCard }, '.elements');
 const user = new UserInfo({ username: '.profile__name', job: '.profile__subname', avatar: '.profile__avatar' });
 
-const openPopupImg = new PopupWithImage('popup_img');
-
-const openDeleteConfirmPopup = new PopupWithSubmit({
-    popupSelector: 'popup_delete',
-});
-
-openDeleteConfirmPopup.setEventListeners();
-
 const api = new Api({
     url: 'https://mesto.nomoreparties.co/v1/cohort-41',
     header: {
@@ -46,7 +38,7 @@ Promise.all([api.getInitialCards(), api.getUserInfo()])
     .then(([initialCards, userData]) => {
         user.setUserInfo(userData);
         user_Id = userData._id;
-        section.renderItems(initialCards);
+        section.renderItems(initialCards.reverse());
     })
 //.catch((err) => {
 //   console.log(`Ошибка: ${err}`);
@@ -86,7 +78,11 @@ function renderCard(cardData) {
         }
     }, '#element-template');
     return section.addItem(cardElement.createCard());
-}
+};
+
+const openPopupImg = new PopupWithImage('popup_img');
+
+const openDeleteConfirmPopup = new PopupWithSubmit({ popupSelector: 'popup_delete' });
 
 const openPopupEditAvatar = new PopupWithForm({
     popupSelector: 'popup_edit_avatar',
@@ -127,6 +123,7 @@ openPopupImg.setEventListeners();
 openPopupAddFrom.setEventListeners();
 openPopupEditForm.setEventListeners();
 openPopupEditAvatar.setEventListeners();
+openDeleteConfirmPopup.setEventListeners();
 
 popupAddButton.addEventListener('click', () => {
     formAddValidator.toggleButtonDisabled();
