@@ -41,6 +41,6 @@
 .popup__input_type-error{border-bottom:1px solid red}
 .popup__container-del{height:181px}
 .popup__title-delete{color:#000;font-family:Inter;font-size:24px;font-style:normal;font-weight:900;height:23px;line-height:29px;margin:34px 36px 0;padding:0;width:358px}
-.popup__delete-confirm-btn{background-color:#000;border:none;border-radius:2px;color:#fff;font-family:Inter,Arial,sans-serif;font-size:18px;font-style:normal;font-weight:400;height:50px;line-height:22px;margin:38px 36px 36px;padding:0;text-align:center;width:358px}.popup__delete-confirm-btn:hover{cursor:pointer;opacity:.6}
+.popup__delete-confirm-btn{background-color:#000;border:none;border-radius:2px;color:#fff;font-family:Inter,Arial,sans-serif;font-size:18px;font-style:normal;font-weight:400;height:50px;line-height:22px;margin:38px 36px 36px;padding:0;text-align:center;width:358px}.popup__delete-confirm-btn:hover{cursor:pointer;opacity:.6}@media screen and (max-width:767px){.popup__delete-confirm-btn{font-size:14px;font-weight:400;height:46px;line-height:17px;margin:45px 22px 25px;width:238px}}
 .popup__container-avatar{height:272px}
 
