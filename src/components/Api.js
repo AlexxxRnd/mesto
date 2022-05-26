@@ -6,7 +6,6 @@ export default class Api {
 
     _getResponse(res) {
         if (res.ok) {
-            //return console.log(res.json());
             return res.json();
         }
         return Promise.reject(`Ошибка: ${res.status}`)

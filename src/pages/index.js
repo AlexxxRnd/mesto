@@ -23,7 +23,12 @@ import {
 
 let user_Id;
 
-const section = new Section({ renderer: renderCard }, '.elements');
+const section = new Section({
+    renderer: (card) => {
+        section.addItem(renderCard(card));
+    },
+}, '.elements');
+
 const user = new UserInfo({ username: '.profile__name', job: '.profile__subname', avatar: '.profile__avatar' });
 
 const api = new Api({
@@ -87,7 +92,8 @@ function renderCard(cardData) {
                 });
         }
     }, '#element-template');
-    return section.addItem(cardElement.createCard());
+    //return section.addItem(cardElement.createCard());
+    return cardElement.createCard();
 };
 
 const openPopupImg = new PopupWithImage('popup_img');
@@ -118,7 +124,8 @@ const openPopupAddFrom = new PopupWithForm({
         openPopupAddFrom.loading(true);
         api.addCard(data)
             .then((data) => {
-                renderCard(data);
+                //renderCard(data);
+                section.addItem(renderCard(data));
                 openPopupAddFrom.close();
             })
             .catch((error) => {
@@ -177,6 +184,6 @@ popupEditButton.addEventListener('click', () => {
 });
 
 avatarButton.addEventListener('click', () => {
-    avatar.value = user.getUserInfo().avatar;
+    //avatar.value = user.getUserInfo().avatar;
     openPopupEditAvatar.open();
 });
