@@ -18,7 +18,6 @@ import {
     objValidation,
     nameInput,
     jobInput,
-    avatar,
 } from '../scripts/constants.js';
 
 let user_Id;
@@ -92,7 +91,6 @@ function renderCard(cardData) {
                 });
         }
     }, '#element-template');
-    //return section.addItem(cardElement.createCard());
     return cardElement.createCard();
 };
 
@@ -124,7 +122,6 @@ const openPopupAddFrom = new PopupWithForm({
         openPopupAddFrom.loading(true);
         api.addCard(data)
             .then((data) => {
-                //renderCard(data);
                 section.addItem(renderCard(data));
                 openPopupAddFrom.close();
             })
@@ -184,6 +181,5 @@ popupEditButton.addEventListener('click', () => {
 });
 
 avatarButton.addEventListener('click', () => {
-    //avatar.value = user.getUserInfo().avatar;
     openPopupEditAvatar.open();
 });
